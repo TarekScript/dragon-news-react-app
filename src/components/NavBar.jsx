@@ -4,9 +4,9 @@ import nonUserimg from '../assets/user.png'
 
 const NavBar = () => {
     const links = <>
-        <li to='/'><NavLink>Home</NavLink></li>
-        <li to='/about'><NavLink>About</NavLink></li>
-        <li to='/career'><NavLink>Career</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to="about">About</NavLink></li>
+        <li><NavLink to='/career'>Career</NavLink></li>
     </>
     return (
         <div className="navbar">
