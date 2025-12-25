@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import nonUserimg from '../assets/user.png'
+import { AuthContex } from '../provider/AuthProvider';
 
 const NavBar = () => {
+    const { user, logOutUser } = use(AuthContex);
+    const handleLogOut = () => {
+        logOutUser()
+            .then(() => {
+                // Sign-out successful.
+            }).catch((error) => {
+                // An error happened.
+            });
+    }
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to="about">About</NavLink></li>
@@ -30,7 +40,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 <img className='mr-4' src={nonUserimg} alt="" />
-                <Link to='/auth/login' className="btn bg-primary text-white px-8">LogIn</Link>
+                {user ? <button onClick={handleLogOut} className="btn bg-primary text-white px-8">LogOut</button> : <Link to='/auth/login' className="btn bg-primary text-white px-8">LogIn</Link>}
             </div>
         </div>
     );
