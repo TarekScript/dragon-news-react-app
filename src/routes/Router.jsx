@@ -3,6 +3,7 @@ import CategoryNews from "../components/pages/CategoryNews";
 import ErrorPage from "../components/pages/ErrorPage";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
+import NewsDetails from "../components/pages/NewsDetails";
 import Register from "../components/pages/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import HomeLayouts from "../layouts/HomeLayouts";
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
                 Component: Register
             }
         ]
+    },
+    {
+        loader: () => fetch('/news.json'),
+        path: '/news_details/:id',
+        Component: NewsDetails
     }
 ])
 export default router;

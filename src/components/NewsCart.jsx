@@ -2,9 +2,10 @@ import React from 'react';
 import { CiBookmark, CiShare2, CiStar } from "react-icons/ci";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { Link } from 'react-router';
 
 const NewsCart = ({ news }) => {
-    const { author, title, thumbnail_url, details, rating, total_view } = news;
+    const { author, title, thumbnail_url, details, rating, total_view, id } = news;
     return (
         <div className='mb-8 rounded-lg shadow-lg  py-6 px-4'>
             <div className='flex rounded-lg justify-between items-center bg-base-300'>
@@ -29,7 +30,7 @@ const NewsCart = ({ news }) => {
                 {
                     details.length > 200 ? (<>
                         {details.slice(0, 200)}....
-                        <span className='text-[#FF8C47] font-semibold'>Read More</span>
+                        <Link to={`/news_details/${id}`} className='text-[#FF8C47] font-semibold'>Read More</Link>
                     </>)
                         :
                         details
