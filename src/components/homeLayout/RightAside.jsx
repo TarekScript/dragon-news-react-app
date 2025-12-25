@@ -34,7 +34,7 @@ const RightAside = () => {
             <img src={swimingImg} alt="" />
             <img src={classImg} alt="" />
             <img src={playgroundImg} alt="" />
-            <img className='mt-4' src={bannerbgImg} alt="" />
+            <img className='mt-4 flex mx-auto' src={bannerbgImg} alt="" />
         </div>
     );
 };
