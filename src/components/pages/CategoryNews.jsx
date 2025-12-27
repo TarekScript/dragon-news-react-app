@@ -13,7 +13,7 @@ const CategoryNews = () => {
         else if (id == '1') {
             const filterdNews = data.filter(news => news.others.is_today_pick);
             setCategoryNews(filterdNews);
-            console.log(filterdNews);
+            // console.log(filterdNews);
         }
         else {
             const filterdNews = data.filter(news => news.category_id == id);
