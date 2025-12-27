@@ -1,15 +1,20 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContex } from '../../provider/AuthProvider';
 
 const Login = () => {
     const { loginUser } = use(AuthContex);
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const handleLogIn = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         loginUser(email, password)
-            .then(result => console.log(result.user))
+            .then(result => {
+                navigate(`${location.state ? location.state : "/"}`)
+            })
             .catch(error => console.log(error))
     }
     return (

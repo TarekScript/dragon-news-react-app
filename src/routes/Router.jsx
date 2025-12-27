@@ -2,11 +2,13 @@ import { createBrowserRouter } from "react-router";
 import CategoryNews from "../components/pages/CategoryNews";
 import ErrorPage from "../components/pages/ErrorPage";
 import Home from "../components/pages/Home";
+import LoadingPage from "../components/pages/LoadingPage";
 import Login from "../components/pages/Login";
 import NewsDetails from "../components/pages/NewsDetails";
 import Register from "../components/pages/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import HomeLayouts from "../layouts/HomeLayouts";
+import PrivateRoute from "../provider/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +23,8 @@ const router = createBrowserRouter([
             {
                 loader: () => fetch('/news.json'),
                 path: "/category/:id",
-                Component: CategoryNews
+                Component: CategoryNews,
+                hydrateFallbackElement: <LoadingPage></LoadingPage>
             }
         ]
     },
@@ -42,7 +45,8 @@ const router = createBrowserRouter([
     {
         loader: () => fetch('/news.json'),
         path: '/news_details/:id',
-        Component: NewsDetails
+        element: <PrivateRoute> <NewsDetails></NewsDetails> </PrivateRoute>,
+        hydrateFallbackElement: <LoadingPage></LoadingPage>
     }
 ])
 export default router;

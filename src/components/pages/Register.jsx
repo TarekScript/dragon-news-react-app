@@ -1,17 +1,27 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContex } from '../../provider/AuthProvider';
 
 const Register = () => {
-    const { createUser } = use(AuthContex)
+    const { createUser, updateUserProfile } = use(AuthContex);
+    const navigate = useNavigate();
     const handleRegister = (e) => {
         e.preventDefault();
         const name = e.target.name.value;
-        const photoUrl = e.target.photo.value;
+        const photo = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         createUser(email, password)
-            .then(result => console.log(result.user))
+            .then(result => {
+                updateUserProfile({ displayName: name, photoURL: photo })
+                    .then(() => {
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                navigate('/')
+            })
             .catch(error => console.log(error))
     }
     return (

@@ -39,7 +39,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <img className='mr-4' src={nonUserimg} alt="" />
+                <img className='mr-4 w-10 rounded-full' src={user?.photoURL ? user?.photoURL : nonUserimg} alt="" />
                 {user ? <button onClick={handleLogOut} className="btn bg-primary text-white px-8">LogOut</button> : <Link to='/auth/login' className="btn bg-primary text-white px-8">LogIn</Link>}
             </div>
         </div>
