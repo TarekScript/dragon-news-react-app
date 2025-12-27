@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from '@firebase/auth';
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/firebase.init';
 export const AuthContex = createContext();
@@ -6,7 +6,23 @@ export const AuthContex = createContext();
 const AuthProvider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [loader, setLoader] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
     // console.log(user);
+
+    // log in with google 
+    const googleLogIn = () => {
+        setLoader(true);
+        return signInWithPopup(auth, googleProvider)
+    }
+    // github log in 
+    const gitHubLogin = () => {
+        return signInWithPopup(auth, githubProvider)
+    }
+    // forget password 
+    const forgetsPassword = (email) => {
+        return sendPasswordResetEmail(auth, email)
+    }
     const createUser = (email, password) => {
         setLoader(true);
         return createUserWithEmailAndPassword(auth, email, password)
@@ -37,7 +53,10 @@ const AuthProvider = ({ children }) => {
         logOutUser,
         loginUser,
         loader,
-        updateUserProfile
+        updateUserProfile,
+        googleLogIn,
+        gitHubLogin,
+        forgetsPassword
     }
     return <AuthContex value={authData}>{children}</AuthContex>
 
